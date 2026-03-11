@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+// In browser: use same host as page (so IP access works); else use env or localhost
+function getApiUrl(): string {
+  if (typeof window !== 'undefined') {
+    return process.env.NEXT_PUBLIC_API_URL || `http://${window.location.hostname}:4000/api`;
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+}
+const API_URL = getApiUrl();
 
 export const api = axios.create({
   baseURL: API_URL,

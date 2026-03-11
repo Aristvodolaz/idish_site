@@ -62,7 +62,7 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       PORT: 4000
       NODE_ENV: development
-      CORS_ORIGIN: http://localhost:3010
+      CORS_ORIGIN: http://localhost:3010,http://155.212.216.148:3010
     ports:
       - '4000:4000'
     depends_on:
