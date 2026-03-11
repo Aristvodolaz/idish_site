@@ -33,10 +33,10 @@ This will start:
 - Redis cache (port 6379)
 - Meilisearch (port 7700)
 - Backend API (port 4000)
-- Frontend (port 3000)
+- Frontend (port 3010)
 
 5. **Access the application**
-- Frontend: http://localhost:3000
+- Frontend: http://localhost:3010
 - Backend API: http://localhost:4000/api
 - Meilisearch: http://localhost:7700
 
@@ -51,6 +51,16 @@ The database will be automatically:
   - Grammar rules
   - Sample lessons
   - Tests
+
+### О предупреждениях npm при сборке Docker
+
+При первой сборке (`docker-compose up`) вы можете увидеть сообщения вида:
+- `npm warn deprecated rimraf@3.0.2`  
+- `npm warn deprecated glob@7.2.3`  
+- `npm warn deprecated eslint@8.57.1`  
+и т.п.
+
+Это **предупреждения** об устаревших транзитивных зависимостях (зависимостях зависимостей). Они **не мешают** сборке и работе приложения. Контейнеры должны успешно подняться. Игнорировать их безопасно; при желании часть предупреждений можно уменьшить позже обновлением зависимостей в `package.json`.
 
 ---
 
@@ -114,7 +124,7 @@ cp .env.local.example .env.local
 npm run dev
 ```
 
-Frontend will run on http://localhost:3000
+Frontend will run on http://localhost:3010
 
 ---
 

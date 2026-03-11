@@ -49,7 +49,7 @@ When you see:
 🚀 Ulpan AI Backend running
 ```
 
-Open: **http://localhost:3000**
+Open: **http://localhost:3010**
 
 ---
 
@@ -149,7 +149,7 @@ Read **QUICKSTART.md** for detailed guide.
 docker-compose up
 ```
 
-Open http://localhost:3000
+Open http://localhost:3010
 
 **Start Learning Hebrew Today!**
 
@@ -159,7 +159,7 @@ Open http://localhost:3000
 
 ## 📞 Quick Links
 
-- Frontend: http://localhost:3000
+- Frontend: http://localhost:3010
 - Backend API: http://localhost:4000/api
 - Database GUI: `cd backend && npx prisma studio`
 

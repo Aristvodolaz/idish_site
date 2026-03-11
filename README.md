@@ -45,7 +45,7 @@ cp .env.example .env
 docker-compose up
 
 # 3. Откройте приложение
-# Frontend: http://localhost:3000
+# Frontend: http://localhost:3010
 # Backend: http://localhost:4000/api
 ```
 
@@ -275,7 +275,7 @@ Built by Principal Software Architect & AI Product Designer
 docker-compose up
 ```
 
-Open http://localhost:3000 and start your journey!
+Open http://localhost:3010 and start your journey!
 
 **שלום! (Shalom!)** 🇮🇱
 # idish_site
