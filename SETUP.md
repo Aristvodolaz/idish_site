@@ -293,6 +293,30 @@ npm run start
 
 ## Troubleshooting
 
+### Creating ulpan-frontend ... error
+Часто из‑за занятого порта 3010 или старого контейнера.
+
+1. Посмотреть полный вывод ошибки:
+   ```bash
+   docker-compose up frontend
+   ```
+   (без `-d`, чтобы видеть логи в консоли)
+
+2. Удалить старый контейнер и порт:
+   ```bash
+   docker-compose down
+   docker rm -f ulpan-frontend 2>/dev/null
+   # Проверить, кто занял 3010 (Linux):
+   # ss -tlnp | grep 3010   или   lsof -i :3010
+   ```
+
+3. Если порт 3010 занят — в `docker-compose.yml` у сервиса `frontend` сменить порты, например:
+   ```yaml
+   ports:
+     - '3011:3010'
+   ```
+   Тогда фронт будет доступен по http://localhost:3011 (или ваш_IP:3011).
+
 ### Database Connection Issues
 - Check PostgreSQL is running
 - Verify DATABASE_URL in .env

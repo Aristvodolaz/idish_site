@@ -95,6 +95,8 @@ services:
       - /app/node_modules
       - /app/.next
     command: npm run dev
+    # If 3010 is in use, change ports above to e.g. '3011:3010'
+    restart: on-failure
 
 volumes:
   postgres_data:
