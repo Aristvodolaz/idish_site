@@ -1,0 +1,114 @@
+[
+    {
+        "title": "Buying Groceries",
+        "titleEn": "Buying Groceries",
+        "titleRu": "Покупка продуктов",
+        "level": 1,
+        "category": "shopping",
+        "contentJson": [
+            {
+                "speaker": "A",
+                "hebrew": "שלום, יש לכם לחם טרי?",
+                "translationRu": "Здравствуйте, у вас есть свежий хлеб?",
+                "transcription": "shalom, yesh lakhem lekhem tari?"
+            },
+            {
+                "speaker": "B",
+                "hebrew": "כן, יש לחם לבן ולחם שחור.",
+                "translationRu": "Да, есть белый хлеб и черный хлеб.",
+                "transcription": "ken, yesh lekhem lavan ve-lekhem shakhor."
+            },
+            {
+                "speaker": "A",
+                "hebrew": "אני רוצה לחם שחור אחד.",
+                "translationRu": "Я хочу один черный хлеб.",
+                "transcription": "ani rotse lekhem shakhor ekhad."
+            },
+            {
+                "speaker": "B",
+                "hebrew": "עוד משהו?",
+                "translationRu": "Что-нибудь еще?",
+                "transcription": "od mashehu?"
+            },
+            {
+                "speaker": "A",
+                "hebrew": "לא, רק זה. כמה זה?",
+                "translationRu": "Нет, только это. Сколько это?",
+                "transcription": "lo, rak ze. kama ze?"
+            }
+        ],
+        "vocabularyJson": [
+            {
+                "hebrew": "טרי",
+                "translationRu": "Свежий",
+                "transcription": "tari"
+            },
+            {
+                "hebrew": "חלב",
+                "translationRu": "Молоко",
+                "transcription": "khalav"
+            },
+            {
+                "hebrew": "עוד משהו",
+                "translationRu": "Что-нибудь еще",
+                "transcription": "od mashehu"
+            }
+        ]
+    },
+    {
+        "title": "Taking a Taxi",
+        "titleEn": "Taking a Taxi",
+        "titleRu": "Поездка на такси",
+        "level": 1,
+        "category": "transport",
+        "contentJson": [
+            {
+                "speaker": "A",
+                "hebrew": "שלום, פנוי?",
+                "translationRu": "Здравствуйте, свободно?",
+                "transcription": "shalom, panui?"
+            },
+            {
+                "speaker": "B",
+                "hebrew": "כן, לאן?",
+                "translationRu": "Да, куда?",
+                "transcription": "ken, le'an?"
+            },
+            {
+                "speaker": "A",
+                "hebrew": "למרכז העיר בבקשה.",
+                "translationRu": "В центр города, пожалуйста.",
+                "transcription": "lamerkaz ha-ir bevakasha."
+            },
+            {
+                "speaker": "B",
+                "hebrew": "בסדר. עם מונה או מחיר קבוע?",
+                "translationRu": "Хорошо. По счетчику или фиксированная цена?",
+                "transcription": "beseder. im mone o mekhir kavu'a?"
+            },
+            {
+                "speaker": "A",
+                "hebrew": "עם מונה בבקשה.",
+                "translationRu": "По счетчику, пожалуйста.",
+                "transcription": "im mone bevakasha."
+            }
+        ],
+        "vocabularyJson": [
+            {
+                "hebrew": "פנוי",
+                "translationRu": "Свободно (о такси, месте)",
+                "transcription": "panui"
+            },
+            {
+                "hebrew": "מרכז",
+                "translationRu": "Центр",
+                "transcription": "merkaz"
+            },
+            {
+                "hebrew": "מונה",
+                "translationRu": "Счетчик",
+                "transcription": "mone"
+            }
+        ]
+    }
+]

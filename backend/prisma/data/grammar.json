@@ -1,0 +1,117 @@
+[
+    {
+        "title": "Nouns and Gender",
+        "titleEn": "Nouns and Gender",
+        "titleRu": "Существительные и Род",
+        "contentEn": "In Hebrew, every noun is either masculine or feminine. usually, feminine nouns end in 'ה' (ah) or 'ת' (t), while masculine nouns do not have a specific ending.",
+        "contentRu": "В иврите каждое существительное имеет мужской или женский род. Обычно женские существительные заканчиваются на 'ה' (а) или 'ת' (т), в то время как мужские не имеют специфического окончания.",
+        "level": 1,
+        "order": 1,
+        "examples": [
+            {
+                "hebrew": "ילד",
+                "translation": "boy",
+                "explanation": "Masculine"
+            },
+            {
+                "hebrew": "ילדה",
+                "translation": "girl",
+                "explanation": "Feminine, ends in ה"
+            },
+            {
+                "hebrew": "מחברת",
+                "translation": "notebook",
+                "explanation": "Feminine, ends in ת"
+            }
+        ]
+    },
+    {
+        "title": "The Definite Article",
+        "titleEn": "The Definite Article",
+        "titleRu": "Определенный артикль",
+        "contentEn": "The definite article in Hebrew is the letter 'ה' (ha), attached as a prefix to the noun. There is no indefinite article (a/an).",
+        "contentRu": "Определенный артикль в иврите — это буква 'ה' (ха), которая добавляется к слову как приставка. Неопределенного артикля в иврите нет.",
+        "level": 1,
+        "order": 2,
+        "examples": [
+            {
+                "hebrew": "ספר",
+                "translation": "a book",
+                "explanation": "Indefinite"
+            },
+            {
+                "hebrew": "הספר",
+                "translation": "the book",
+                "explanation": "Definite"
+            }
+        ]
+    },
+    {
+        "title": "Pronouns: I, You, He, She",
+        "titleEn": "Pronouns",
+        "titleRu": "Местоимения",
+        "contentEn": "Hebrew pronouns differ by gender for 'you', 'they'. 'I' and 'we' are the same for both genders.",
+        "contentRu": "Местоимения 'ты' и 'они' различаются по родам. 'Я' и 'мы' одинаковы для обоих родов.",
+        "level": 1,
+        "order": 3,
+        "examples": [
+            {
+                "hebrew": "אני סטוּדֶנְט",
+                "translation": "I am a student (m)",
+                "explanation": "ani student"
+            },
+            {
+                "hebrew": "אתה יפה",
+                "translation": "You are beautiful (m)",
+                "explanation": "ata yafe"
+            },
+            {
+                "hebrew": "את יפה",
+                "translation": "You are beautiful (f)",
+                "explanation": "at yafa"
+            }
+        ]
+    },
+    {
+        "title": "Simple Sentences (Verbless)",
+        "titleEn": "Verbless Sentences",
+        "titleRu": "Предложения без глагола 'быть'",
+        "contentEn": "In the present tense, Hebrew does not use the verb 'to be' (am, is, are). You simply put the subject and the predicate together.",
+        "contentRu": "В настоящем времени иврит не использует глагол 'быть'. Вы просто ставите подлежащее и сказуемое рядом.",
+        "level": 1,
+        "order": 4,
+        "examples": [
+            {
+                "hebrew": "אני עייף",
+                "translation": "I am tired",
+                "explanation": "Literally: 'I tired'"
+            },
+            {
+                "hebrew": "הספר טוב",
+                "translation": "The book is good",
+                "explanation": "Literally: 'The book good'"
+            }
+        ]
+    },
+    {
+        "title": "Plural Nouns Basics",
+        "titleEn": "Plural Nouns",
+        "titleRu": "Множественное число существительных",
+        "contentEn": "Masculine plurals mostly end in 'ים' (-im), while feminine plurals end in 'ות' (-ot).",
+        "contentRu": "Мужское множественное число обычно заканчивается на 'ים' (-им), а женское на 'ות' (-от).",
+        "level": 1,
+        "order": 5,
+        "examples": [
+            {
+                "hebrew": "ילד - ילדים",
+                "translation": "boy - boys",
+                "explanation": "yeled - yeladim"
+            },
+            {
+                "hebrew": "ילדה - ילדות",
+                "translation": "girl - girls",
+                "explanation": "yalda - yaldot"
+            }
+        ]
+    }
+]

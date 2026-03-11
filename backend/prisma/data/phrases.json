@@ -1,0 +1,182 @@
+[
+    {
+        "hebrew": "מזל טוב",
+        "transcription": "mazal tov",
+        "translationEn": "Congratulations / Good luck",
+        "translationRu": "Поздравляю / Удачи",
+        "level": 1,
+        "category": "expressions",
+        "context": "Used to congratulate someone on a happy occasion"
+    },
+    {
+        "hebrew": "אין בעיה",
+        "transcription": "eyn be'aya",
+        "translationEn": "No problem",
+        "translationRu": "Нет проблем",
+        "level": 1,
+        "category": "expressions",
+        "context": "When someone thanks you or apologizes"
+    },
+    {
+        "hebrew": "בבקשה",
+        "transcription": "bevakasha",
+        "translationEn": "Please / You're welcome",
+        "translationRu": "Пожалуйста",
+        "level": 1,
+        "category": "expressions",
+        "context": "When asking for something or responding to 'thank you'"
+    },
+    {
+        "hebrew": "סליחה",
+        "transcription": "slikha",
+        "translationEn": "Sorry / Excuse me",
+        "translationRu": "Извините / Простите",
+        "level": 1,
+        "category": "expressions",
+        "context": "To get attention or apologize"
+    },
+    {
+        "hebrew": "לא נורא",
+        "transcription": "lo nora",
+        "translationEn": "Never mind / Not so bad",
+        "translationRu": "Ничего страшного",
+        "level": 2,
+        "category": "expressions",
+        "context": "To comfort someone when something minor goes wrong"
+    },
+    {
+        "hebrew": "מה קורה?",
+        "transcription": "ma kore?",
+        "translationEn": "What's happening? / What's up?",
+        "translationRu": "Что происходит? / Как дела?",
+        "level": 1,
+        "category": "greetings",
+        "context": "Informal way to ask how someone is"
+    },
+    {
+        "hebrew": "מה נשמע?",
+        "transcription": "ma nishma?",
+        "translationEn": "How does it sound? / How are you?",
+        "translationRu": "Как слышно? / Как дела?",
+        "level": 1,
+        "category": "greetings",
+        "context": "Very common way to ask how someone is doing"
+    },
+    {
+        "hebrew": "הכל טוב",
+        "transcription": "hakol tov",
+        "translationEn": "Everything is good",
+        "translationRu": "Всё хорошо",
+        "level": 1,
+        "category": "expressions",
+        "context": "A casual response to 'how are you'"
+    },
+    {
+        "hebrew": "רגע",
+        "transcription": "rega",
+        "translationEn": "Wait a moment",
+        "translationRu": "Минуточку / Подожди",
+        "level": 1,
+        "category": "expressions",
+        "context": "Asking someone to wait briefly"
+    },
+    {
+        "hebrew": "באמת?",
+        "transcription": "be'emet?",
+        "translationEn": "Really?",
+        "translationRu": "Правда?",
+        "level": 1,
+        "category": "expressions",
+        "context": "Expressing surprise or confirming"
+    },
+    {
+        "hebrew": "כמובן",
+        "transcription": "kamuvan",
+        "translationEn": "Of course",
+        "translationRu": "Конечно",
+        "level": 1,
+        "category": "expressions",
+        "context": "Agreeing strongly or stating the obvious"
+    },
+    {
+        "hebrew": "לבריאות",
+        "transcription": "labri'ut",
+        "translationEn": "Bless you / To health",
+        "translationRu": "Будь здоров",
+        "level": 1,
+        "category": "expressions",
+        "context": "Said when someone sneezes"
+    },
+    {
+        "hebrew": "בתיאבון",
+        "transcription": "bete'avon",
+        "translationEn": "Bon appetit",
+        "translationRu": "Приятного аппетита",
+        "level": 1,
+        "category": "expressions",
+        "context": "Said before eating a meal"
+    },
+    {
+        "hebrew": "ימינה",
+        "transcription": "yamina",
+        "translationEn": "To the right",
+        "translationRu": "Направо",
+        "level": 1,
+        "category": "directions",
+        "context": "Giving directions"
+    },
+    {
+        "hebrew": "שמאלה",
+        "transcription": "smola",
+        "translationEn": "To the left",
+        "translationRu": "Налево",
+        "level": 1,
+        "category": "directions",
+        "context": "Giving directions"
+    },
+    {
+        "hebrew": "ישר",
+        "transcription": "yashar",
+        "translationEn": "Straight ahead",
+        "translationRu": "Прямо",
+        "level": 1,
+        "category": "directions",
+        "context": "Giving directions"
+    },
+    {
+        "hebrew": "אני לא יודע/ת",
+        "transcription": "ani lo yode'a (m) / yoda'at (f)",
+        "translationEn": "I don't know",
+        "translationRu": "Я не знаю",
+        "level": 1,
+        "category": "communication",
+        "context": "When you lack information"
+    },
+    {
+        "hebrew": "מה השעה?",
+        "transcription": "ma hasha'a?",
+        "translationEn": "What time is it?",
+        "translationRu": "Который час?",
+        "level": 1,
+        "category": "time",
+        "context": "Asking for the time"
+    },
+    {
+        "hebrew": "חם לי",
+        "transcription": "kham li",
+        "translationEn": "I am hot",
+        "translationRu": "Мне жарко",
+        "level": 1,
+        "category": "feelings",
+        "context": "Expressing physical state"
+    },
+    {
+        "hebrew": "קר לי",
+        "transcription": "kar li",
+        "translationEn": "I am cold",
+        "translationRu": "Мне холодно",
+        "level": 1,
+        "category": "feelings",
+        "context": "Expressing physical state"
+    }
+]

@@ -1,0 +1,65 @@
+[
+    {
+        "title": "Vocabulary Test: Objects & Time",
+        "titleEn": "Vocabulary Test: Objects & Time",
+        "titleRu": "Тест на словарный запас: Предметы и Время",
+        "description": "Проверка новых базовых слов",
+        "type": "multiple_choice",
+        "level": 1,
+        "passingScore": 80,
+        "timeLimit": 10,
+        "isPublished": true,
+        "questionsJson": [
+            {
+                "question": "Как сказать 'сейчас' на иврите?",
+                "options": [
+                    "מחר",
+                    "עכשיו",
+                    "תמיד",
+                    "אתמול"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Что значит 'רחוב'?",
+                "options": [
+                    "Магазин",
+                    "Город",
+                    "Улица",
+                    "Дом"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Как переводится 'книга'?",
+                "options": [
+                    "ספר",
+                    "עט",
+                    "מחשב",
+                    "טלפון"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "Выберите правильный перевод для слова 'всегда'",
+                "options": [
+                    "לעולם לא",
+                    "תמיד",
+                    "הכל",
+                    "קצת"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Что означает 'אחר כך'?",
+                "options": [
+                    "До того",
+                    "Потом / Позже",
+                    "Никогда",
+                    "Всегда"
+                ],
+                "correctAnswer": 1
+            }
+        ]
+    }
+]

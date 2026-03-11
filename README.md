@@ -279,3 +279,4 @@ Open http://localhost:3000 and start your journey!
 
 **שלום! (Shalom!)** 🇮🇱
 # idish_site
+# idish

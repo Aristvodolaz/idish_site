@@ -1,0 +1,318 @@
+// Ulpan AI Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication and profile
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  firstName     String?  @map("first_name")
+  lastName      String?  @map("last_name")
+  interfaceLang String   @default("en") @map("interface_lang") // en, ru
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  progress      Progress[]
+  flashcards    Flashcard[]
+  testResults   TestResult[]
+  aiChats       AiChat[]
+  statistics    UserStatistics?
+
+  @@map("users")
+}
+
+// User statistics and progress tracking
+model UserStatistics {
+  id                String   @id @default(uuid())
+  userId            String   @unique @map("user_id")
+  totalLessons      Int      @default(0) @map("total_lessons")
+  completedLessons  Int      @default(0) @map("completed_lessons")
+  totalWords        Int      @default(0) @map("total_words")
+  learnedWords      Int      @default(0) @map("learned_words")
+  currentStreak     Int      @default(0) @map("current_streak")
+  longestStreak     Int      @default(0) @map("longest_streak")
+  totalStudyTime    Int      @default(0) @map("total_study_time") // in minutes
+  lastStudyDate     DateTime? @map("last_study_date")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_statistics")
+}
+
+// Hebrew alphabet letters
+model Letter {
+  id            String   @id @default(uuid())
+  hebrew        String   @unique
+  name          String
+  transcription String
+  pronunciation String
+  exampleWord   String   @map("example_word")
+  exampleTrans  String   @map("example_translation")
+  audioUrl      String?  @map("audio_url")
+  order         Int      @unique
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("letters")
+}
+
+// Vocabulary words
+model Word {
+  id              String   @id @default(uuid())
+  hebrew          String   @unique
+  transcription   String
+  translationEn   String   @map("translation_en")
+  translationRu   String   @map("translation_ru")
+  audioUrl        String?  @map("audio_url")
+  level           Int      @default(1) // 1-5 difficulty
+  category        String?  // family, food, travel, etc.
+  exampleSentence String?  @map("example_sentence")
+  exampleTransEn  String?  @map("example_translation_en")
+  exampleTransRu  String?  @map("example_translation_ru")
+  imageUrl        String?  @map("image_url")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  // Relations
+  flashcards Flashcard[]
+  lessonWords LessonWord[]
+
+  @@map("words")
+}
+
+// Common phrases
+model Phrase {
+  id             String   @id @default(uuid())
+  hebrew         String   @unique
+  transcription  String
+  translationEn  String   @map("translation_en")
+  translationRu  String   @map("translation_ru")
+  audioUrl       String?  @map("audio_url")
+  level          Int      @default(1)
+  category       String?  // greetings, questions, daily, etc.
+  context        String?  // when to use this phrase
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  lessonPhrases LessonPhrase[]
+
+  @@map("phrases")
+}
+
+// Grammar rules and explanations
+model Grammar {
+  id             String   @id @default(uuid())
+  title          String
+  titleEn        String   @map("title_en")
+  titleRu        String   @map("title_ru")
+  contentEn      String   @map("content_en") @db.Text
+  contentRu      String   @map("content_ru") @db.Text
+  examples       Json     // array of {hebrew, translation, explanation}
+  level          Int      @default(1)
+  order          Int
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  lessonGrammar LessonGrammar[]
+
+  @@map("grammar")
+}
+
+// Lesson types: alphabet, vocabulary, phrase, grammar, mixed
+model Lesson {
+  id          String   @id @default(uuid())
+  title       String
+  titleEn     String   @map("title_en")
+  titleRu     String   @map("title_ru")
+  description String?
+  type        String   // alphabet, vocabulary, phrase, grammar, mixed
+  level       Int      @default(1)
+  order       Int
+  contentJson Json?    @map("content_json") // flexible content structure
+  isPublished Boolean  @default(false) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  progress        Progress[]
+  lessonWords     LessonWord[]
+  lessonPhrases   LessonPhrase[]
+  lessonGrammar   LessonGrammar[]
+  lessonDialogues LessonDialogue[]
+
+  @@map("lessons")
+}
+
+// Dialogues for lessons
+model Dialogue {
+  id             String   @id @default(uuid())
+  title          String
+  titleEn        String   @map("title_en")
+  titleRu        String   @map("title_ru")
+  contentJson    Json     @map("content_json") // array of {speaker, hebrew, translationRu, transcription}
+  vocabularyJson Json?    @map("vocabulary_json") // array of new words in this dialogue
+  level          Int      @default(1)
+  category       String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  lessonDialogues LessonDialogue[]
+
+  @@map("dialogues")
+}
+
+// Many-to-many: Lesson <-> Dialogue
+model LessonDialogue {
+  id         String @id @default(uuid())
+  lessonId   String @map("lesson_id")
+  dialogueId String @map("dialogue_id")
+  order      Int    @default(0)
+
+  lesson   Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  dialogue Dialogue @relation(fields: [dialogueId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, dialogueId])
+  @@map("lesson_dialogues")
+}
+
+// Many-to-many: Lesson <-> Word
+model LessonWord {
+  id       String @id @default(uuid())
+  lessonId String @map("lesson_id")
+  wordId   String @map("word_id")
+  order    Int    @default(0)
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  word   Word   @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, wordId])
+  @@map("lesson_words")
+}
+
+// Many-to-many: Lesson <-> Phrase
+model LessonPhrase {
+  id       String @id @default(uuid())
+  lessonId String @map("lesson_id")
+  phraseId String @map("phrase_id")
+  order    Int    @default(0)
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  phrase Phrase @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, phraseId])
+  @@map("lesson_phrases")
+}
+
+// Many-to-many: Lesson <-> Grammar
+model LessonGrammar {
+  id        String @id @default(uuid())
+  lessonId  String @map("lesson_id")
+  grammarId String @map("grammar_id")
+  order     Int    @default(0)
+
+  lesson  Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  grammar Grammar @relation(fields: [grammarId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, grammarId])
+  @@map("lesson_grammar")
+}
+
+// User progress on lessons
+model Progress {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  lessonId    String   @map("lesson_id")
+  completed   Boolean  @default(false)
+  score       Int?     // percentage 0-100
+  timeSpent   Int      @default(0) @map("time_spent") // in seconds
+  completedAt DateTime? @map("completed_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@map("progress")
+}
+
+// SRS Flashcards for spaced repetition
+model Flashcard {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  wordId      String   @map("word_id")
+  nextReview  DateTime @map("next_review")
+  interval    Int      @default(1) // days until next review
+  easeFactor  Float    @default(2.5) @map("ease_factor") // SM-2 algorithm
+  repetitions Int      @default(0)
+  lastReview  DateTime? @map("last_review")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@map("flashcards")
+}
+
+// Tests and quizzes
+model Test {
+  id             String   @id @default(uuid())
+  title          String
+  titleEn        String   @map("title_en")
+  titleRu        String   @map("title_ru")
+  description    String?
+  type           String   // multiple_choice, fill_blank, listening, speaking
+  level          Int      @default(1)
+  questionsJson  Json     @map("questions_json") // array of questions
+  passingScore   Int      @default(70) @map("passing_score")
+  timeLimit      Int?     @map("time_limit") // in minutes
+  isPublished    Boolean  @default(false) @map("is_published")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  testResults TestResult[]
+
+  @@map("tests")
+}
+
+// User test results
+model TestResult {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  testId      String   @map("test_id")
+  score       Int      // percentage 0-100
+  answersJson Json     @map("answers_json") // user answers
+  timeSpent   Int      @map("time_spent") // in seconds
+  passed      Boolean  @default(false)
+  completedAt DateTime @default(now()) @map("completed_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  test Test @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  @@map("test_results")
+}
+
+// AI Tutor chat history
+model AiChat {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  messages  Json     // array of {role, content, timestamp}
+  context   String?  // lesson context, grammar topic, etc.
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("ai_chats")
+}
