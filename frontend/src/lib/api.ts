@@ -1,23 +1,27 @@
 import axios from 'axios';
 
-// In browser: use same host as page (so IP access works); else use env or localhost
+// In browser: use same host as page (so IP/domain access works); else localhost
 function getApiUrl(): string {
   if (typeof window !== 'undefined') {
     return process.env.NEXT_PUBLIC_API_URL || `http://${window.location.hostname}:4000/api`;
   }
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 }
-const API_URL = getApiUrl();
 
 export const api = axios.create({
-  baseURL: API_URL,
+  baseURL: '', // set per-request in interceptor so browser always uses current host
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Add auth token to requests
+// Add auth token and set baseURL (so IP/domain works even after SSR)
 api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    config.baseURL = getApiUrl();
+  } else {
+    config.baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+  }
   const token = localStorage.getItem('accessToken');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -36,7 +40,8 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
-        const { data } = await axios.post(`${API_URL}/auth/refresh`, {
+        const baseURL = typeof window !== 'undefined' ? getApiUrl() : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api');
+        const { data } = await axios.post(`${baseURL}/auth/refresh`, {
           refreshToken,
         });
 
