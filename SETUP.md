@@ -293,6 +293,37 @@ npm run start
 
 ## Troubleshooting
 
+### no space left on device (ulpan-backend / Docker)
+На диске закончилось место. Освободите место и очистите Docker.
+
+1. Проверить место на диске:
+   ```bash
+   df -h
+   ```
+
+2. Очистить Docker (образы, контейнеры, тома, кэш сборки):
+   ```bash
+   docker system prune -a --volumes -f
+   ```
+   Удалятся неиспользуемые образы, контейнеры и тома. Если нужны другие проекты в Docker — сначала остановите их или не используйте `--volumes`.
+
+3. Более осторожная очистка (только неиспользуемое, без томов):
+   ```bash
+   docker system prune -a -f
+   docker volume prune -f
+   ```
+
+4. Снова запустить проект:
+   ```bash
+   docker-compose up -d
+   ```
+
+5. Если места всё ещё мало — найти большие каталоги:
+   ```bash
+   du -sh /var/lib/docker/* 2>/dev/null
+   du -sh /root/* /home/* 2>/dev/null | sort -h
+   ```
+
 ### Creating ulpan-frontend ... error
 Часто из‑за занятого порта 3010 или старого контейнера.
 
