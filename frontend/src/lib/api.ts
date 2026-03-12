@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// In browser: use same host as page (so IP/domain access works); else localhost
+// In browser: always use same host as page (avoids "loopback" block when page is on IP/domain)
 function getApiUrl(): string {
   if (typeof window !== 'undefined') {
-    return process.env.NEXT_PUBLIC_API_URL || `http://${window.location.hostname}:4000/api`;
+    return `http://${window.location.hostname}:4000/api`;
   }
   return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 }
@@ -15,14 +15,10 @@ export const api = axios.create({
   },
 });
 
-// Add auth token and set baseURL (so IP/domain works even after SSR)
+// Set baseURL per request: in browser = same host (fixes CORS/loopback when opening by IP)
 api.interceptors.request.use((config) => {
-  if (typeof window !== 'undefined') {
-    config.baseURL = getApiUrl();
-  } else {
-    config.baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
-  }
-  const token = localStorage.getItem('accessToken');
+  config.baseURL = getApiUrl();
+  const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
