@@ -293,36 +293,42 @@ npm run start
 
 ## Troubleshooting
 
-### no space left on device (ulpan-backend / Docker)
-На диске закончилось место. Освободите место и очистите Docker.
+### no space left on device (ulpan-backend / ulpan-frontend)
+На диске закончилось место. Освободите место, затем снова запустите проект.
 
-1. Проверить место на диске:
+1. Проверить место:
    ```bash
    df -h
    ```
 
-2. Очистить Docker (образы, контейнеры, тома, кэш сборки):
+2. Остановить проект и очистить Docker (освободит больше всего):
    ```bash
+   cd ~/idish_site   # или ваш путь к проекту
+   docker-compose down
    docker system prune -a --volumes -f
    ```
-   Удалятся неиспользуемые образы, контейнеры и тома. Если нужны другие проекты в Docker — сначала остановите их или не используйте `--volumes`.
+   Удалятся все неиспользуемые образы, контейнеры, тома и кэш сборки. Данные БД этого проекта (в именованных томах postgres_data и др.) тоже удалятся — после следующего `up` БД будет пустая, seed выполнится заново.
 
-3. Более осторожная очистка (только неиспользуемое, без томов):
+3. Если данные БД нужны и не хотите трогать тома:
    ```bash
+   docker-compose down
    docker system prune -a -f
+   docker builder prune -a -f
    docker volume prune -f
    ```
+   (Именованные тома `postgres_data`, `redis_data`, `meilisearch_data` не удалятся, если к ним есть ссылки.)
 
-4. Снова запустить проект:
+4. Запустить снова:
    ```bash
    docker-compose up -d
    ```
 
-5. Если места всё ещё мало — найти большие каталоги:
+5. Если места всё ещё мало — посмотреть, что занимает место:
    ```bash
    du -sh /var/lib/docker/* 2>/dev/null
    du -sh /root/* /home/* 2>/dev/null | sort -h
    ```
+   При необходимости удалить старые логи, кэш пакетов (`apt clean`, `npm cache clean --force` в проектах) или другие большие файлы.
 
 ### Creating ulpan-frontend ... error
 Часто из‑за занятого порта 3010 или старого контейнера.
@@ -348,15 +354,32 @@ npm run start
    ```
    Тогда фронт будет доступен по http://localhost:3011 (или ваш_IP:3011).
 
+### Role "postgres" does not exist (password authentication failed)
+В контейнере создан пользователь **myuser**, а не **postgres**. Подключаться нужно так:
+- **Хост:** localhost (или IP сервера), порт **5433**
+- **Пользователь:** `myuser`
+- **Пароль:** `123456`
+- **БД:** `ivrit`
+
+Если с хоста подключается скрипт или GUI с пользователем "postgres", смените на **myuser** или создайте пользователя postgres вручную:
+```bash
+docker exec -it ulpan-postgres psql -U myuser -d ivrit -c "CREATE ROLE postgres WITH LOGIN PASSWORD '123456' SUPERUSER;"
+```
+
 ### Database Connection Issues
 - Check PostgreSQL is running
 - Verify DATABASE_URL in .env
 - Run `npx prisma migrate dev`
 
-### Frontend Can't Connect to Backend
-- Check backend is running on port 4000
-- Verify NEXT_PUBLIC_API_URL in .env.local
-- Check CORS settings in backend
+### CORS error / Frontend Can't Connect to Backend
+- Убедитесь, что бэкенд запущен (порт 4000).
+- В `docker-compose` у backend в **CORS_ORIGIN** должен быть origin вашего фронта, например:  
+  `http://localhost:3010,http://ВАШ_IP:3010` (несколько через запятую).
+- Перезапустите backend после смены CORS: `docker-compose restart backend`.
+- Фронт должен открываться по тому же хосту, что указан в CORS (иначе браузер блокирует запрос).
+
+### Frontend (other)
+- Verify NEXT_PUBLIC_API_URL only if you set it; otherwise the app uses the same host as the page.
 
 ### AI Features Not Working
 - Verify OPENAI_API_KEY is set
